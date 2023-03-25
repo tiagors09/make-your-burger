@@ -1,5 +1,5 @@
 # make-your-burger
-
+Project from Matheus Battisti [VueJS 3 course](https://www.youtube.com/playlist?list=PLnDvRpP8BnezDglaAvtWgQXzsOmXUuRHL).
 ## Project setup
 ```
 npm install
