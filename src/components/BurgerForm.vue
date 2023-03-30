@@ -65,7 +65,8 @@ export default {
             try {
                 let { data } = await axios({
                     method: 'get',
-                    url: 'http://localhost:3000/ingredientes'
+                    url: '/ingredientes',
+                    baseURL: 'http://localhost:3000',
                 })
                 this.breads = data.paes
                 this.meats = data.carnes
@@ -79,7 +80,8 @@ export default {
             try {
                 let { data } = await axios({
                     method: 'post',
-                    url: 'http://localhost:3000/burgers',
+                    url: '/burgers',
+                    baseURL: 'http://localhost:3000',
                     data: {
                         name: this.name,
                         meat: this.meat,
