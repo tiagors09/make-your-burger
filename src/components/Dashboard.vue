@@ -10,15 +10,23 @@
                 <div>Ações:</div>
             </div>
             <div id="burger-table-rows">
-                <div class="burger-table-rows">
-                    <!-- <div class="order-number"></div> -->
-                </div>
-                <div>
-                    <select name="status" class="status">
-                        <option value="">Selecione o status do Burger:</option>
-                        <!-- Status aqui -->
-                    </select>
-                    <button class="delete-btn">Cancelar</button>
+                <div class="burger-table-row" v-for="burger in this.burgers" :key="burger.id">
+                    <div class="order-number">{{ burger.id }}</div>
+                    <div>{{ burger.nome }}</div>
+                    <div>{{ burger.pao }}</div>
+                    <div>{{ burger.carne }}</div>
+                    <div>
+                        <ul>
+                            <li v-for="(optional, index) in burger.optional" :key="index">{{ optional }}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <select name="status" class="status">
+                            <option value="">Selecione o status do Burger:</option>
+                            <!-- Status aqui -->
+                        </select>
+                        <button class="delete-btn">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,8 +34,34 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'Dashboard',
+    data() {
+        return {
+            burgers: null,
+            burger_id: null,
+            status: []
+        }
+    },
+    methods: {
+        async getPedidos() {
+            try {
+                const { data } = await axios({
+                    method: 'get',
+                    url: 'http://localhost:3000/burgers'
+                })
+                console.log(data)
+                this.burgers = data
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    },
+    mounted() {
+        this.getPedidos()
+    }
 }
 </script>
 
@@ -72,16 +106,19 @@ select {
 }
 
 .delete-btn {
-    background-color: #222;
-    color: #fcba03;
-    border: 2px solid #222;
+    background-color: var(--black);
+    color: var(--yellow);
+    border: 2px solid var(--black);
     padding: 10px;
     font-size: 16px;
     margin: 0 auto;
     cursor: pointer;
+    font-weight: bold;
+    transition: .5;
 }
 
 .delete-btn:hover {
-    
+    background-color: transparent;
+    color: var(--black)
 }
 </style>
