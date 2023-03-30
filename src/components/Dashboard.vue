@@ -2,12 +2,12 @@
     <div id="burger-table">
         <div>
             <div id="burger-table-heading">
-                <div class="order-id">#:</div>
-                <div>Cliente:</div>
-                <div>Pão:</div>
-                <div>Carne:</div>
-                <div>Opcionais:</div>
-                <div>Ações:</div>
+                <div class="order-id">#</div>
+                <div>Cliente</div>
+                <div>Pão</div>
+                <div>Carne</div>
+                <div>Opcionais</div>
+                <div>Status</div>
             </div>
             <div id="burger-table-rows">
                 <div class="burger-table-row" v-for="burger in this.burgers" :key="burger.id">
@@ -21,9 +21,9 @@
                         </ul>
                     </div>
                     <div>
-                        <select name="status" class="status">
-                            <option value="">Selecione o status do Burger:</option>
-                            <!-- Status aqui -->
+                        <select name="status" class="status" @change="handlerStatus">
+                            <option value="">{{ burger.status }}</option>
+                            <option v-for="{ id, tipo } in this.status" :key="id" :value="tipo">{{ tipo }}</option>
                         </select>
                         <button class="delete-btn">Cancelar</button>
                     </div>
@@ -45,6 +45,9 @@ export default {
             status: []
         }
     },
+    props: {
+        id: null
+    },
     methods: {
         async getPedidos() {
             try {
@@ -52,15 +55,29 @@ export default {
                     method: 'get',
                     url: 'http://localhost:3000/burgers'
                 })
-                console.log(data)
+                // console.log(data)
                 this.burgers = data
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+
+        async getAllStatus() {
+            try {
+                const { data } = await axios({
+                    method: 'get',
+                    url: 'http://localhost:3000/status'
+                })
+                // console.log(data)
+                this.status = data
+            } catch (error) {
+                console.log(error)
+            }
+        },
     },
     mounted() {
         this.getPedidos()
+        this.getAllStatus()
     }
 }
 </script>
