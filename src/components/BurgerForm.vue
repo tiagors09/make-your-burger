@@ -125,9 +125,9 @@ export default {
 label {
     font-weight: bold;
     margin-bottom: 15px;
-    color: #222;
+    color: var(--black);
     padding: 5px 10px;
-    border-left: 4px solid #FCBA03;
+    border-left: 4px solid var(--yellow);
 }
 
 input,
@@ -163,10 +163,10 @@ select {
 }
 
 .submit-btn {
-    background-color: #222;
-    color: #fcba03;
+    background-color: var(--black);
+    color: var(--yellow);
     font-weight: bold;
-    border: 2px solid #222;
+    border: 2px solid var(--black);
     padding: 10px;
     font-size: 16px;
     margin: 0 auto;
@@ -176,6 +176,6 @@ select {
 
 .submit-btn:hover {
     background-color: transparent;
-    color: #222;
+    color: var(--black);
 }
 </style>
