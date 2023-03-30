@@ -12,9 +12,9 @@
             <div id="burger-table-rows">
                 <div class="burger-table-row" v-for="burger in this.burgers" :key="burger.id">
                     <div class="order-number">{{ burger.id }}</div>
-                    <div>{{ burger.nome }}</div>
-                    <div>{{ burger.pao }}</div>
-                    <div>{{ burger.carne }}</div>
+                    <div>{{ burger.name }}</div>
+                    <div>{{ burger.bread }}</div>
+                    <div>{{ burger.meats }}</div>
                     <div>
                         <ul>
                             <li v-for="(optional, index) in burger.optional" :key="index">{{ optional }}</li>
@@ -25,7 +25,7 @@
                             <option value="">{{ burger.status }}</option>
                             <option v-for="{ id, tipo } in this.status" :key="id" :value="tipo">{{ tipo }}</option>
                         </select>
-                        <button class="delete-btn">Cancelar</button>
+                        <button @click="deleteBurger(burger.id)" class="delete-btn">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -45,9 +45,6 @@ export default {
             status: []
         }
     },
-    props: {
-        id: null
-    },
     methods: {
         async getPedidos() {
             try {
@@ -55,7 +52,7 @@ export default {
                     method: 'get',
                     url: 'http://localhost:3000/burgers'
                 })
-                // console.log(data)
+
                 this.burgers = data
             } catch (err) {
                 console.log(err)
@@ -66,14 +63,27 @@ export default {
             try {
                 const { data } = await axios({
                     method: 'get',
-                    url: 'http://localhost:3000/status'
+                    url: '/status',
+                    baseURL: 'http://localhost:3000'
                 })
-                // console.log(data)
+
                 this.status = data
             } catch (error) {
                 console.log(error)
             }
         },
+        async deleteBurger(burgerId) {
+            try {
+                const { data } = await axios({
+                    method: 'delete',
+                    url: `/burgers/${burgerId}`,
+                    baseURL: 'http://localhost:3000',
+                })
+                this.getPedidos()
+            } catch (err) {
+                console.log(err)
+            }
+        }
     },
     mounted() {
         this.getPedidos()
