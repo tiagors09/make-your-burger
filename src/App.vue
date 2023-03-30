@@ -26,6 +26,11 @@ export default {
 </script>
 
 <style>
+:root {
+    --yellow: #fcba03;
+    --black: #222;
+}
+
 * {
     font-family: Arial, Helvetica, sans-serif;
     padding: 0;
@@ -42,6 +47,6 @@ h1 {
     text-align: center;
     font-size: 42px;
     margin-bottom: 30px;
-    color: #222;
+    color: var(--black);
 }
 </style>
