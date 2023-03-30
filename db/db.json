@@ -82,7 +82,7 @@
       "nome": "Matheus Battisti",
       "carne": "Picanha",
       "pao": "Italiano Branco",
-      "opcionais": [
+      "optional": [
         "Bacon",
         "Salame",
         "Cebola roxa"
@@ -94,71 +94,12 @@
       "nome": "João Coelho",
       "carne": "Maminha",
       "pao": "3 Queijos",
-      "opcionais": [
+      "optional": [
         "Salame",
         "Cebola roxa"
       ],
       "status": "Solicitado",
       "id": 4
-    },
-    {
-      "name": null,
-      "meat": null,
-      "bread": null,
-      "optional": [],
-      "status": "Solicitado",
-      "id": 5
-    },
-    {
-      "name": "Tiago Rodrigues Sousa",
-      "meat": "Alcatra",
-      "bread": "Italiano Branco",
-      "optional": [
-        "Pepino",
-        "Tomate",
-        "Cheddar",
-        "Salame",
-        "Cebola roxa",
-        "Bacon"
-      ],
-      "status": "Solicitado",
-      "id": 6
-    },
-    {
-      "name": "Tiago Rodrigues Sousa",
-      "meat": "Alcatra",
-      "bread": "Italiano Branco",
-      "optional": [],
-      "status": "Solicitado",
-      "id": 7
-    },
-    {
-      "name": "Tiago Rodrigues Sousa",
-      "meat": "Maminha",
-      "bread": "Italiano Branco",
-      "optional": [
-        "Bacon"
-      ],
-      "status": "Solicitado",
-      "id": 8
-    },
-    {
-      "name": "Tiago Rodrigues Sousa",
-      "meat": "Maminha",
-      "bread": "Parmesão e Orégano",
-      "optional": [
-        "Tomate"
-      ],
-      "status": "Solicitado",
-      "id": 9
-    },
-    {
-      "name": "Tiago Rodrigues Sousa",
-      "meat": "Maminha",
-      "bread": "Italiano Branco",
-      "optional": [],
-      "status": "Solicitado",
-      "id": 10
     }
   ]
 }
