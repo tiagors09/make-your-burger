@@ -1,5 +1,6 @@
 <template>
     <div id="burger-table">
+        <Message :message="this.msg" v-show="this.msg" />
         <div>
             <div id="burger-table-heading">
                 <div class="order-id">#</div>
@@ -21,7 +22,7 @@
                         </ul>
                     </div>
                     <div>
-                        <select name="status" class="status" @change="handlerStatus">
+                        <select name="status" class="status" @change="updateBurger($event, burger.id)">
                             <option value="">{{ burger.status }}</option>
                             <option v-for="{ id, tipo } in this.status" :key="id" :value="tipo">{{ tipo }}</option>
                         </select>
@@ -35,6 +36,7 @@
 
 <script>
 import axios from 'axios'
+import Message from './Message.vue'
 
 export default {
     name: 'Dashboard',
@@ -42,15 +44,20 @@ export default {
         return {
             burgers: null,
             burger_id: null,
-            status: []
+            status: [],
+            msg: null
         }
+    },
+    components: {
+        Message,
     },
     methods: {
         async getPedidos() {
             try {
                 const { data } = await axios({
                     method: 'get',
-                    url: 'http://localhost:3000/burgers'
+                    url: '/burgers',
+                    baseURL: 'http://localhost:3000'
                 })
 
                 this.burgers = data
@@ -72,6 +79,7 @@ export default {
                 console.log(error)
             }
         },
+
         async deleteBurger(burgerId) {
             try {
                 const { data } = await axios({
@@ -79,10 +87,33 @@ export default {
                     url: `/burgers/${burgerId}`,
                     baseURL: 'http://localhost:3000',
                 })
+
+                this.msg = `Pedido N°${burgerId} removido com sucesso`
+
+                setTimeout(() => this.msg = null, 3e3)
+
                 this.getPedidos()
             } catch (err) {
                 console.log(err)
             }
+        },
+
+        async updateBurger(event, id) {
+            const option = event.target.value
+
+            const { data } = await axios({
+                url: `/burgers/${id}`,
+                baseURL: 'http://localhost:3000',
+                data: { "status": option },
+                method: 'patch',
+                headers: { "Content-Type": "application/json" }
+            })
+
+            this.msg = `Pedido N°${data.id} atualizado com sucesso`
+
+            await setTimeout(() => this.msg = null, 3e3)
+
+            console.log(data)
         }
     },
     mounted() {
