@@ -77,5 +77,17 @@
       "tipo": "Finalizado"
     }
   ],
-  "burgers": []
+  "burgers": [
+    {
+      "name": "Tiago Rodrigues Sousa ",
+      "meat": "Picanha",
+      "bread": "Parmesão e Orégano",
+      "optional": [
+        "Salame",
+        "Pepino"
+      ],
+      "status": "Solicitado",
+      "id": 1
+    }
+  ]
 }
